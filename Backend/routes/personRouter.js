@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
         const newPerson = new Person(data); //create a new object
 
         const response = newPerson.save();
-        console.log('data saved',response);
         res.status(200).json(response)
 
     } catch (error) {
@@ -21,7 +20,6 @@ router.post('/', async (req, res) => {
 router.get("/", async (req, res) => {
     try {
         const data = await Person.find(); 
-        console.log('data fetched')
         res.status(200).json(data)
     } catch (err) {
         res.status(500).json("Internal server error", err)
@@ -32,11 +30,9 @@ router.get("/", async (req, res) => {
 router.get("/:workType", async(req,res)=>{
     try{
         const workType=req.params.workType;
-        console.log('req.params',req.params)
         if(workType==="chef" ||workType==="manager"||workType==="waiter" )
         {
             const response =await Person.find({work:workType})
-            console.log('data fetched')
        res.status(200).json(response)
         }else{
             res.status(404).json({err:'Invalid error'})
@@ -53,7 +49,6 @@ router.put('/:id', async(req,res)=>{
         const personId=req.params.id;//extract the person's Id from the URL parameter
 const updatedPerson=req.body; //updated data for the person
 
-console.log('updatedPerson',updatedPerson)
 
 const response=await Person.findByIdAndUpdate(personId,updatedPerson,{
     new:true, //return the updated document

@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         const newPerson = new Person(data); //create a new object
 
         const response = newPerson.save();
-        console.log('data saved');
+        console.log('data saved',response);
         res.status(200).json(response)
 
     } catch (error) {

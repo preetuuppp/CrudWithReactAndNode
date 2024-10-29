@@ -1,11 +1,16 @@
 const express = require("express")
 const db = require("./db")
+const cors = require('cors')
 const app = express();
+const passport =require('passport')
+const LocalStrategy=require("passport-local").Strategy
 const bodyParser = require("body-parser");//parse the data in req.body
 app.use(bodyParser.json());
 const personRoute=require('./routes/personRouter')
 const menuRouter=require("./routes/menuItemRouter")
 
+ 
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.json("Welcome in our hotels")
